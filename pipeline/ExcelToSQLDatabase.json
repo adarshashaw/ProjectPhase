@@ -1,0 +1,99 @@
+{
+	"name": "ExcelToSQLDatabase",
+	"properties": {
+		"activities": [
+			{
+				"name": "ForEach",
+				"type": "ForEach",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@variables('SheetName')",
+						"type": "Expression"
+					},
+					"isSequential": false,
+					"activities": [
+						{
+							"name": "Copy data",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "ExcelSource",
+									"storeSettings": {
+										"type": "FileServerReadSettings",
+										"recursive": true
+									}
+								},
+								"sink": {
+									"type": "AzureSqlSink",
+									"tableOption": "autoCreate"
+								},
+								"enableStaging": false,
+								"translator": {
+									"type": "TabularTranslator",
+									"typeConversion": true,
+									"typeConversionSettings": {
+										"allowDataTruncation": true,
+										"treatBooleanAsNumber": false
+									}
+								}
+							},
+							"inputs": [
+								{
+									"referenceName": "ExcelSourceDataSet",
+									"type": "DatasetReference",
+									"parameters": {
+										"SheetName": {
+											"value": "@item()",
+											"type": "Expression"
+										}
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "DestSqlDatabase",
+									"type": "DatasetReference",
+									"parameters": {
+										"TableName": {
+											"value": "@item()",
+											"type": "Expression"
+										}
+									}
+								}
+							]
+						}
+					]
+				}
+			}
+		],
+		"variables": {
+			"SheetName": {
+				"type": "Array",
+				"defaultValue": [
+					"DefectType",
+					"Date",
+					"Vendor",
+					"Category",
+					"Plant",
+					"Metrics",
+					"MaterialType",
+					"Defect"
+				]
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2020-10-28T14:17:01Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
