@@ -137,7 +137,7 @@
 							},
 							"sink": {
 								"type": "AzureSqlSink",
-								"preCopyScript": "drop table [IF EXISTS] [dbo].[Category]\ndrop table [IF EXISTS] [dbo].[Date]\ndrop table [IF EXISTS] [dbo].[Defect]\ndrop table [IF EXISTS] [dbo].[DefectType]\ndrop table [IF EXISTS] [dbo].[MaterialType]\ndrop table [IF EXISTS] [dbo].[Metrics]\ndrop table [IF EXISTS] [dbo].[Plant]\ndrop table [IF EXISTS] [dbo].[Vendor]",
+								"preCopyScript": "drop table IF EXISTS [dbo].[Category]\ndrop table IF EXISTS [dbo].[Date]\ndrop table IF EXISTS [dbo].[Defect]\ndrop table IF EXISTS [dbo].[DefectType]\ndrop table IF EXISTS [dbo].[MaterialType]\ndrop table IF EXISTS [dbo].[Metrics]\ndrop table IF EXISTS [dbo].[Plant]\ndrop table IF EXISTS [dbo].[Vendor]",
 								"tableOption": "autoCreate",
 								"disableMetricsCollection": false
 							},
