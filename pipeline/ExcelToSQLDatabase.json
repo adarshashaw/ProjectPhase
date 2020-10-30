@@ -72,10 +72,7 @@
 									"referenceName": "DestSqlDatabase",
 									"type": "DatasetReference",
 									"parameters": {
-										"TableName": {
-											"value": "@item()",
-											"type": "Expression"
-										}
+										"TableName": "Date"
 									}
 								}
 							]
