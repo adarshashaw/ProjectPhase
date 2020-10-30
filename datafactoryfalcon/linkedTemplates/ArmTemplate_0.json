@@ -229,7 +229,10 @@
 											"referenceName": "DestSqlDatabase",
 											"type": "DatasetReference",
 											"parameters": {
-												"TableName": "Date"
+												"TableName": {
+													"value": "@item()",
+													"type": "Expression"
+												}
 											}
 										}
 									]
@@ -259,7 +262,7 @@
 							},
 							"sink": {
 								"type": "AzureSqlSink",
-								"preCopyScript": "drop table [dbo].[Category]\ndrop table [dbo].[Date]\ndrop table [dbo].[Defect]\ndrop table [dbo].[DefectType]\ndrop table [dbo].[MaterialType]\ndrop table [dbo].[Metrics]\ndrop table [dbo].[Plant]\ndrop table [dbo].[Vendor]",
+								"preCopyScript": "drop table [IF EXISTS] [dbo].[Category]\ndrop table [IF EXISTS] [dbo].[Date]\ndrop table [IF EXISTS] [dbo].[Defect]\ndrop table [IF EXISTS] [dbo].[DefectType]\ndrop table [IF EXISTS] [dbo].[MaterialType]\ndrop table [IF EXISTS] [dbo].[Metrics]\ndrop table [IF EXISTS] [dbo].[Plant]\ndrop table [IF EXISTS] [dbo].[Vendor]",
 								"tableOption": "autoCreate",
 								"disableMetricsCollection": false
 							},
