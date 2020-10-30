@@ -317,6 +317,37 @@
 				"[concat(variables('factoryId'), '/datasets/ExcelSourceDataSet')]",
 				"[concat(variables('factoryId'), '/datasets/DestSqlDatabase')]"
 			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ScheduledTrigger')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "ExcelToSQLDatabase",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
+				"type": "ScheduleTrigger",
+				"typeProperties": {
+					"recurrence": {
+						"frequency": "Hour",
+						"interval": 1,
+						"startTime": "2020-10-30T16:40:00Z",
+						"endTime": "2020-11-04T10:58:00Z",
+						"timeZone": "UTC"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/ExcelToSQLDatabase')]"
+			]
 		}
 	]
 }
